@@ -1,0 +1,485 @@
+:root {
+  --bg-color: #0b0f1f;
+  --primary: #ff5fd2;
+  --secondary: #00f6ff;
+  --accent: #ffb347;
+  --text: #f5f5f5;
+  --muted: rgba(245, 245, 245, 0.7);
+  --card-bg: rgba(14, 21, 48, 0.85);
+  --glass: rgba(14, 21, 48, 0.65);
+  --gradient: linear-gradient(135deg, rgba(255, 111, 145, 0.9), rgba(0, 233, 255, 0.7));
+  --neon-shadow: 0 0 20px rgba(255, 111, 145, 0.8), 0 0 40px rgba(0, 233, 255, 0.6);
+  --scanline-color: rgba(255, 255, 255, 0.03);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  background: radial-gradient(circle at 20% 20%, rgba(255, 111, 145, 0.15), transparent 35%),
+    radial-gradient(circle at 80% 30%, rgba(0, 233, 255, 0.18), transparent 35%),
+    radial-gradient(circle at 50% 80%, rgba(255, 179, 71, 0.2), transparent 45%),
+    var(--bg-color);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+.scanlines {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(var(--scanline-color) 50%, transparent 50%);
+  background-size: 100% 4px;
+  opacity: 0.7;
+  mix-blend-mode: screen;
+  z-index: 100;
+}
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 6rem 1.5rem 5rem;
+  overflow: hidden;
+}
+
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(255, 95, 210, 0.6), rgba(0, 246, 255, 0.3));
+  filter: blur(10px);
+  opacity: 0.7;
+  animation: pulse 12s ease-in-out infinite;
+  z-index: -1;
+}
+
+.hero__title {
+  font-family: "Monoton", cursive;
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  letter-spacing: 0.25rem;
+  text-shadow: var(--neon-shadow);
+}
+
+.hero__subtitle {
+  font-family: "Press Start 2P", cursive;
+  font-size: clamp(0.75rem, 2.4vw, 1rem);
+  margin-top: 1.25rem;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero__cta {
+  margin-top: 2.5rem;
+  padding: 1rem 2.25rem;
+  border: none;
+  border-radius: 999px;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.85rem;
+  letter-spacing: 0.1rem;
+  color: var(--bg-color);
+  background: var(--gradient);
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: var(--neon-shadow);
+}
+
+.hero__cta:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.hero__cta:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.casino {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem 5rem;
+}
+
+.casino__nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 2rem;
+  position: sticky;
+  top: 1rem;
+  z-index: 5;
+}
+
+.nav__button {
+  background: var(--glass);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  padding: 0.8rem 1.6rem;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.65rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav__button.active,
+.nav__button:hover {
+  background: var(--gradient);
+  color: var(--bg-color);
+  box-shadow: var(--neon-shadow);
+  transform: translateY(-2px);
+}
+
+.casino__content {
+  backdrop-filter: blur(14px);
+  background: rgba(10, 14, 30, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  padding: 2.5rem;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.game {
+  display: none;
+  animation: fadeIn 0.6s ease;
+}
+
+.game.active {
+  display: block;
+}
+
+.game__header h2 {
+  font-family: "Monoton", cursive;
+  letter-spacing: 0.15rem;
+  margin-bottom: 0.5rem;
+}
+
+.game__header p {
+  color: var(--muted);
+  font-size: 0.95rem;
+  margin-bottom: 1.75rem;
+}
+
+.game__controls {
+  margin-top: 1.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.game__controls button {
+  background: var(--gradient);
+  border: none;
+  color: var(--bg-color);
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.75rem;
+  padding: 0.85rem 1.6rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: var(--neon-shadow);
+  transition: transform 0.2s ease;
+}
+
+.game__controls button:hover:not(:disabled) {
+  transform: translateY(-3px);
+}
+
+.game__controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.game__message {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--accent);
+  min-height: 1.5rem;
+}
+
+.bet {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+}
+
+.bet select,
+.roulette__controls select,
+.roulette__controls input {
+  background: rgba(12, 20, 45, 0.8);
+  color: var(--text);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.75rem;
+  padding: 0.6rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.slots {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(90px, 120px));
+  justify-content: center;
+  gap: 1rem;
+  padding: 1.5rem;
+  background: var(--card-bg);
+  border-radius: 1.5rem;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+.slot__reel {
+  font-size: clamp(3rem, 10vw, 4.5rem);
+  text-align: center;
+  padding: 1rem 0;
+  background: rgba(12, 20, 45, 0.8);
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.slot__reel.spinning {
+  animation: slotFlash 0.6s ease;
+}
+
+.blackjack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.blackjack__hand {
+  background: var(--card-bg);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.blackjack__hand h3 {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.8rem;
+  margin-bottom: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+}
+
+.card-row {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: rgba(12, 20, 45, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 0.9rem;
+  padding: 0.9rem 0.75rem;
+  font-size: 1.1rem;
+  min-width: 54px;
+  text-align: center;
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.45);
+}
+
+.roulette {
+  display: grid;
+  gap: 1.75rem;
+}
+
+.roulette__wheel {
+  position: relative;
+  width: min(320px, 70vw);
+  aspect-ratio: 1;
+  margin: 0 auto;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 90deg,
+    #ff5fd2 0 18deg,
+    #0ff 18deg 36deg,
+    #ffb347 36deg 54deg,
+    #ff5fd2 54deg 72deg,
+    #0ff 72deg 90deg,
+    #ffb347 90deg 108deg,
+    #ff5fd2 108deg 126deg,
+    #0ff 126deg 144deg,
+    #ffb347 144deg 162deg,
+    #ff5fd2 162deg 180deg,
+    #0ff 180deg 198deg,
+    #ffb347 198deg 216deg,
+    #ff5fd2 216deg 234deg,
+    #0ff 234deg 252deg,
+    #ffb347 252deg 270deg,
+    #ff5fd2 270deg 288deg,
+    #0ff 288deg 306deg,
+    #ffb347 306deg 324deg,
+    #ff5fd2 324deg 342deg,
+    #0ff 342deg 360deg
+  );
+  box-shadow: var(--neon-shadow);
+  display: grid;
+  place-items: center;
+}
+
+.wheel__inner {
+  width: 65%;
+  aspect-ratio: 1;
+  background: rgba(12, 20, 45, 0.85);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  border: 3px solid rgba(255, 255, 255, 0.2);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+  position: relative;
+}
+
+.wheel__marker {
+  position: absolute;
+  top: -2.25rem;
+  font-size: 1.5rem;
+  color: var(--accent);
+  text-shadow: var(--neon-shadow);
+}
+
+.roulette__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.craps {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 2rem;
+  background: var(--card-bg);
+  border-radius: 1.5rem;
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.35);
+}
+
+.dice {
+  font-size: clamp(3.5rem, 10vw, 5rem);
+  padding: 1.25rem 1.75rem;
+  background: rgba(12, 20, 45, 0.85);
+  border-radius: 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.4);
+}
+
+.vip {
+  display: grid;
+  gap: 2rem;
+}
+
+.vip__stats p {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.75rem;
+  letter-spacing: 0.08rem;
+  margin-bottom: 0.8rem;
+}
+
+.vip__log {
+  background: var(--card-bg);
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: inset 0 0 25px rgba(0, 0, 0, 0.3);
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.vip__log h3 {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+#event-log {
+  list-style: none;
+  display: grid;
+  gap: 0.75rem;
+}
+
+#event-log li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  background: rgba(12, 20, 45, 0.8);
+  border-radius: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.log__timestamp {
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.55rem;
+  letter-spacing: 0.08rem;
+  color: var(--secondary);
+}
+
+.log__description {
+  font-size: 0.85rem;
+}
+
+.footer {
+  margin-top: 4rem;
+  padding: 2rem 1rem;
+  text-align: center;
+  color: var(--muted);
+  font-family: "Press Start 2P", cursive;
+  font-size: 0.65rem;
+}
+
+.hidden {
+  display: none !important;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 0.85;
+  }
+}
+
+@keyframes slotFlash {
+  0% {
+    filter: brightness(1);
+  }
+  40% {
+    filter: brightness(1.8);
+    transform: scale(1.05);
+  }
+  100% {
+    filter: brightness(1);
+    transform: scale(1);
+  }
+}
+
+@media (min-width: 768px) {
+  .blackjack {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .vip {
+    grid-template-columns: minmax(250px, 1fr) 1.5fr;
+  }
+}

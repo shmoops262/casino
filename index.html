@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Neon Mirage Casino</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Monoton&family=Press+Start+2P&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines"></div>
+  <header class="hero">
+    <div class="hero__overlay"></div>
+    <h1 class="hero__title">Neon Mirage Casino</h1>
+    <p class="hero__subtitle">Where the 90's never ended and luck never sleeps.</p>
+    <button class="hero__cta" id="enter-casino">Step into the Mirage</button>
+  </header>
+
+  <main class="casino" id="casino">
+    <nav class="casino__nav">
+      <button class="nav__button active" data-target="slots">Slots</button>
+      <button class="nav__button" data-target="blackjack">Blackjack</button>
+      <button class="nav__button" data-target="roulette">Roulette</button>
+      <button class="nav__button" data-target="craps">Miami Dice</button>
+      <button class="nav__button" data-target="vip">VIP Lounge</button>
+    </nav>
+
+    <section class="casino__content">
+      <section class="game active" id="slots">
+        <header class="game__header">
+          <h2>Electric Palms Slots</h2>
+          <p>Spin the reels and chase the neon jackpot.</p>
+        </header>
+        <div class="slots">
+          <div class="slot__reel" id="reel-1">🍹</div>
+          <div class="slot__reel" id="reel-2">🌴</div>
+          <div class="slot__reel" id="reel-3">🎰</div>
+        </div>
+        <div class="game__controls">
+          <button id="spin-button">Spin</button>
+          <label class="bet">
+            <span>Bet</span>
+            <select id="slot-bet">
+              <option value="10">10 Chips</option>
+              <option value="25">25 Chips</option>
+              <option value="50">50 Chips</option>
+              <option value="100">100 Chips</option>
+            </select>
+          </label>
+        </div>
+        <p class="game__message" id="slot-message">Feeling lucky tonight?</p>
+      </section>
+
+      <section class="game" id="blackjack">
+        <header class="game__header">
+          <h2>Vice City Blackjack</h2>
+          <p>Try to hit 21 without going bust!</p>
+        </header>
+        <div class="blackjack">
+          <div class="blackjack__hand">
+            <h3>Your Hand (<span id="player-total">0</span>)</h3>
+            <div class="card-row" id="player-hand"></div>
+          </div>
+          <div class="blackjack__hand">
+            <h3>Dealer (<span id="dealer-total">0</span>)</h3>
+            <div class="card-row" id="dealer-hand"></div>
+          </div>
+        </div>
+        <div class="game__controls">
+          <button id="blackjack-deal">Deal</button>
+          <button id="blackjack-hit" disabled>Hit</button>
+          <button id="blackjack-stand" disabled>Stand</button>
+        </div>
+        <p class="game__message" id="blackjack-message">Ready to deal?</p>
+      </section>
+
+      <section class="game" id="roulette">
+        <header class="game__header">
+          <h2>Sunset Roulette</h2>
+          <p>Place your bet and watch the neon wheel spin.</p>
+        </header>
+        <div class="roulette">
+          <div class="roulette__wheel" id="roulette-wheel">
+            <div class="wheel__inner">
+              <div class="wheel__marker">▲</div>
+            </div>
+          </div>
+          <div class="roulette__controls">
+            <label>
+              <span>Bet on</span>
+              <select id="roulette-bet">
+                <option value="red">Red</option>
+                <option value="black">Black</option>
+                <option value="even">Even</option>
+                <option value="odd">Odd</option>
+                <option value="high">High (19-36)</option>
+                <option value="low">Low (1-18)</option>
+                <option value="straight">Straight (Pick a number)</option>
+              </select>
+            </label>
+            <label id="roulette-number-wrapper" class="hidden">
+              <span>Number</span>
+              <input type="number" id="roulette-number" min="0" max="36" value="7" />
+            </label>
+            <button id="roulette-spin">Spin the Wheel</button>
+          </div>
+        </div>
+        <p class="game__message" id="roulette-message">Neon wheel is ready.</p>
+      </section>
+
+      <section class="game" id="craps">
+        <header class="game__header">
+          <h2>Miami Dice</h2>
+          <p>Roll the dice, chase the vibe.</p>
+        </header>
+        <div class="craps">
+          <div class="dice" id="dice-one">⚀</div>
+          <div class="dice" id="dice-two">⚁</div>
+        </div>
+        <div class="game__controls">
+          <button id="dice-roll">Roll Dice</button>
+        </div>
+        <p class="game__message" id="dice-message">Shoot the dice to start a hot streak.</p>
+      </section>
+
+      <section class="game" id="vip">
+        <header class="game__header">
+          <h2>VIP Lounge</h2>
+          <p>Track your chips and relive your greatest hits.</p>
+        </header>
+        <div class="vip">
+          <div class="vip__stats">
+            <p>Total Chips: <span id="chip-count">1000</span></p>
+            <p>Lifetime Winnings: <span id="lifetime-winnings">0</span></p>
+            <p>Hot Streak: <span id="hot-streak">0</span></p>
+          </div>
+          <div class="vip__log">
+            <h3>Event Log</h3>
+            <ul id="event-log"></ul>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Neon Mirage Casino &mdash; Powered by synthwave dreams since 1994.</p>
+  </footer>
+
+  <template id="event-template">
+    <li>
+      <span class="log__timestamp"></span>
+      <span class="log__description"></span>
+    </li>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
